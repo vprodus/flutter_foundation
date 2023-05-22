@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_fundations/range_selector_form.dart';
 
 class RangeSelectorPage extends StatefulWidget {
   const RangeSelectorPage({super.key});
@@ -8,6 +9,7 @@ class RangeSelectorPage extends StatefulWidget {
 }
 
 class _RangeSelectorPageState extends State<RangeSelectorPage> {
+  final formKey = GlobalKey<FormState>();
   int _min = 0;
   int _max = 0;
 
@@ -17,43 +19,17 @@ class _RangeSelectorPageState extends State<RangeSelectorPage> {
       appBar: AppBar(
         title: Text('Select Range'),
       ),
-      body: Form(
-        child: Container(
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                rangeSelectorTextFormField('Maximum', (value) => _max = value),
-                const SizedBox(height: 12),
-                rangeSelectorTextFormField('Minimum', (value) => _min = value),
-              ],
-            ),
-          ),
-        ),
-      ),
+      body: rangeSelectorForm(
+          formKey, (value) => _max = value, (value) => _min = value),
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.arrow_forward),
         onPressed: () {
-          // TODO: Validate the Form
+          if (formKey.currentState?.validate() == true) {
+            formKey.currentState?.save();
+          }
           // TODO: Navigate to the generator page
         },
       ),
     ); // This trailing comma makes auto-formatting nicer for build methods.
-  }
-
-  TextFormField rangeSelectorTextFormField(
-      String label, void Function(int value) intValueSetter) {
-    return TextFormField(
-      decoration: InputDecoration(
-        border: const OutlineInputBorder(),
-        labelText: label,
-      ),
-      keyboardType: const TextInputType.numberWithOptions(
-        decimal: false,
-        signed: true,
-      ),
-      onSaved: (newValue) => intValueSetter(int.parse(newValue ?? '')),
-    );
   }
 }
