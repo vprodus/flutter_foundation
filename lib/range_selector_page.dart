@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_fundations/randomizer_page.dart';
 import 'package:flutter_fundations/range_selector_form.dart';
 
 class RangeSelectorPage extends StatefulWidget {
@@ -17,7 +18,7 @@ class _RangeSelectorPageState extends State<RangeSelectorPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Select Range'),
+        title: const Text('Select Range'),
       ),
       body: rangeSelectorForm(
           formKey, (value) => _max = value, (value) => _min = value),
@@ -26,8 +27,12 @@ class _RangeSelectorPageState extends State<RangeSelectorPage> {
         onPressed: () {
           if (formKey.currentState?.validate() == true) {
             formKey.currentState?.save();
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => RandomizerPage(min: _min, max: _max),
+              ),
+            );
           }
-          // TODO: Navigate to the generator page
         },
       ),
     ); // This trailing comma makes auto-formatting nicer for build methods.
