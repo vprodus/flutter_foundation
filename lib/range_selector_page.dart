@@ -8,6 +8,9 @@ class RangeSelectorPage extends StatefulWidget {
 }
 
 class _RangeSelectorPageState extends State<RangeSelectorPage> {
+  int _min = 0;
+  int _max = 0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,16 +24,16 @@ class _RangeSelectorPageState extends State<RangeSelectorPage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                RangeForm('Maximum'),
+                rangeSelectorTextFormField('Maximum', (value) => _max = value),
                 const SizedBox(height: 12),
-                RangeForm('Minimum'),
+                rangeSelectorTextFormField('Minimum', (value) => _min = value),
               ],
             ),
           ),
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.arrow_forward),
+        child: const Icon(Icons.arrow_forward),
         onPressed: () {
           // TODO: Validate the Form
           // TODO: Navigate to the generator page
@@ -39,16 +42,18 @@ class _RangeSelectorPageState extends State<RangeSelectorPage> {
     ); // This trailing comma makes auto-formatting nicer for build methods.
   }
 
-  TextFormField RangeForm(label) {
+  TextFormField rangeSelectorTextFormField(
+      String label, void Function(int value) intValueSetter) {
     return TextFormField(
       decoration: InputDecoration(
-        border: OutlineInputBorder(),
+        border: const OutlineInputBorder(),
         labelText: label,
       ),
-      keyboardType: TextInputType.numberWithOptions(
+      keyboardType: const TextInputType.numberWithOptions(
         decimal: false,
         signed: true,
       ),
+      onSaved: (newValue) => intValueSetter(int.parse(newValue ?? '')),
     );
   }
 }
