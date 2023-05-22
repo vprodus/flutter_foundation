@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_fundations/ramdomizer_change_notifier.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_fundations/main.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 typedef IntValueSetter = void Function(int value);
 
-Form rangeSelectorForm(GlobalKey<FormState> formKey, BuildContext context) {
+Form rangeSelectorForm(GlobalKey<FormState> formKey, WidgetRef ref) {
   return Form(
     key: formKey,
     child: Container(
@@ -14,14 +14,10 @@ Form rangeSelectorForm(GlobalKey<FormState> formKey, BuildContext context) {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             rangeSelectorTextFormField(
-                'Maximum',
-                (value) =>
-                    context.read<RandomizerChangeNotifier>().max = value),
+                'Maximum', (value) => ref.read(randomizerProvider).max = value),
             const SizedBox(height: 12),
             rangeSelectorTextFormField(
-                'Minimum',
-                (value) =>
-                    context.read<RandomizerChangeNotifier>().min = value),
+                'Minimum', (value) => ref.read(randomizerProvider).min = value),
           ],
         ),
       ),

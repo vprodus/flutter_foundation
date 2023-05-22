@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_fundations/randomizer_page.dart';
 import 'package:flutter_fundations/range_selector_form.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class RangeSelectorPage extends StatelessWidget {
+class RangeSelectorPage extends ConsumerWidget {
   final formKey = GlobalKey<FormState>();
   RangeSelectorPage({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Select Range'),
       ),
-      body: rangeSelectorForm(formKey, context),
+      body: rangeSelectorForm(formKey, ref),
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.arrow_forward),
         onPressed: () {
