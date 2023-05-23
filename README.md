@@ -14,3 +14,20 @@ A few resources to get you started if this is your first Flutter project:
 For help getting started with Flutter development, view the
 [online documentation](https://docs.flutter.dev/), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
+
+## Create immutable state with freezed package
+
+1. Install packages  
+```
+flutter_pub add riverpod  
+flutter pub add freezed_annotation  
+flutter pub add --dev freezed   
+flutter pub add --dev build_runner  
+```
+
+2. Create state in state notifier  
+Use snippets `fdata`  and `ptf`  
+
+run to create the data classes  
+``` flutter pub get && flutter pub run build_runner build --delete-conflicting-outputs``` 
+```flutter pub run build_runner watch --delete-conflicting-outputs ```  

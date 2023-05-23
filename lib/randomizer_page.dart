@@ -14,14 +14,14 @@ class RandomizerPage extends ConsumerWidget {
       ),
       body: Center(
         child: Text(
-          randomizer.generatedNumer?.toString() ?? 'Generate a number',
+          randomizer.generatedNumber?.toString() ?? 'Generate a number',
           style: const TextStyle(fontSize: 42),
         ),
       ),
       floatingActionButton: FloatingActionButton.extended(
         label: const Text('Generate'),
         onPressed: () {
-          ref.read(randomizerProvider).generateRandomNumber();
+          ref.read(randomizerProvider.notifier).generateRandomNumber();
         },
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,

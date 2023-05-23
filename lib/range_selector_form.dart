@@ -13,11 +13,11 @@ Form rangeSelectorForm(GlobalKey<FormState> formKey, WidgetRef ref) {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            rangeSelectorTextFormField(
-                'Maximum', (value) => ref.read(randomizerProvider).max = value),
+            rangeSelectorTextFormField('Maximum',
+                (value) => ref.read(randomizerProvider.notifier).setMax(value)),
             const SizedBox(height: 12),
-            rangeSelectorTextFormField(
-                'Minimum', (value) => ref.read(randomizerProvider).min = value),
+            rangeSelectorTextFormField('Minimum',
+                (value) => ref.read(randomizerProvider.notifier).setMin(value)),
           ],
         ),
       ),
